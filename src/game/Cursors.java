@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Pixmap;
  * Here you can change the cursors to whatever you want!
  */
 public class Cursors {
+	//Disabled by default
+	private static boolean enabled = false;
 	
 	private static Pixmap normal, attack, click, loot, settings, shoot;
 	
@@ -14,17 +16,19 @@ public class Cursors {
 	private static boolean wasCursorChangedThisFrame = false;
 	
 	public static void init() {
-		normal = new Pixmap(FileLoader.get("res/cursors/Cursor_Basic.png"));
-		attack = new Pixmap(FileLoader.get("res/cursors/Cursor_Attack.png"));
-		click = new Pixmap(FileLoader.get("res/cursors/Cursor_Hand.png"));
-		loot = new Pixmap(FileLoader.get("res/cursors/Cursor_Loot.png"));
-		settings = new Pixmap(FileLoader.get("res/cursors/Cursor_Settings.png"));
-		shoot = new Pixmap(FileLoader.get("res/cursors/Cursor_shoot.png"));
-		changeToNormal();
+		if(enabled) {
+			normal = new Pixmap(FileLoader.get("res/cursors/Cursor_Basic.png"));
+			attack = new Pixmap(FileLoader.get("res/cursors/Cursor_Attack.png"));
+			click = new Pixmap(FileLoader.get("res/cursors/Cursor_Hand.png"));
+			loot = new Pixmap(FileLoader.get("res/cursors/Cursor_Loot.png"));
+			settings = new Pixmap(FileLoader.get("res/cursors/Cursor_Settings.png"));
+			shoot = new Pixmap(FileLoader.get("res/cursors/Cursor_shoot.png"));
+			changeToNormal();
+		}
 	}
 	
 	public static void resetToNormal() {
-		if(wasCursorChangedThisFrame == false)
+		if(wasCursorChangedThisFrame == false && enabled)
 		{
 			changeToNormal();			
 		}
@@ -32,16 +36,18 @@ public class Cursors {
 	}
 	
 	public static void dispose() {
-		normal.dispose();
-		attack.dispose();
-		click.dispose();
-		loot.dispose();
-		settings.dispose();
-		shoot.dispose();
+		if(enabled) { 
+			normal.dispose();
+			attack.dispose();
+			click.dispose();
+			loot.dispose();
+			settings.dispose();
+			shoot.dispose();
+		}
 	}
 	
 	public static void changeToNormal() {
-		if(currentCursor != normal) {
+		if(currentCursor != normal && enabled) {
 			Gdx.input.setCursorImage(normal, 19, 5);
 			currentCursor = normal;
 		}
@@ -49,7 +55,7 @@ public class Cursors {
 	}
 	
 	public static void changeToAttack() {
-		if(currentCursor != attack) {
+		if(currentCursor != attack && enabled) {
 			Gdx.input.setCursorImage(attack, 14, 2);
 			currentCursor = attack;			
 		}
@@ -57,7 +63,7 @@ public class Cursors {
 	}
 	
 	public static void changeToClick() {
-		if(currentCursor != click) {
+		if(currentCursor != click && enabled) {
 			Gdx.input.setCursorImage(click, 0, 0);
 			currentCursor = click;			
 		}
@@ -65,7 +71,7 @@ public class Cursors {
 	}
 	
 	public static void changeToLoot() {
-		if(currentCursor != loot) {
+		if(currentCursor != loot && enabled) {
 			Gdx.input.setCursorImage(loot, 0, 0);
 			currentCursor = loot;
 		}
@@ -73,7 +79,7 @@ public class Cursors {
 	}
 	
 	public static void changeToSettings() {
-		if(currentCursor != settings) {
+		if(currentCursor != settings && enabled) {
 			Gdx.input.setCursorImage(settings, 0, 0);
 			currentCursor = settings;
 		}
@@ -81,7 +87,7 @@ public class Cursors {
 	}
 	
 	public static void changeToShoot() {
-		if(currentCursor != shoot) {
+		if(currentCursor != shoot && enabled) {
 			Gdx.input.setCursorImage(shoot, 0, 0);
 			currentCursor = shoot;			
 		}
